@@ -6,17 +6,18 @@ import Profile from './components/Profile';
 import Navbar from './components/Navbar';
 import PrivateRoute from './Utilities/PrivateRoute';
 import { UserContext } from '.';
+import "./index.css";
 
 function App() {
   const {user} = useContext(UserContext)
 
   return (
-    <div className='app'>
+    <>
       {
         user.isLoggedIn &&
         <Navbar />
       }
-        
+      <div className='app'>
         <Routes>
         <Route path="/" element={
             <PrivateRoute>
@@ -28,6 +29,7 @@ function App() {
           <Route path = '/profile' element = {<Profile />} />
         </Routes>
       </div>
+      </>
   );
 }
 

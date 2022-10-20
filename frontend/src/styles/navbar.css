@@ -4,12 +4,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 5em;
+    height: 3em;
+    width: 100%;
 }
 
 .site-name{
     font-size: 2rem;
-    margin-left: 3vw;
+    padding-left: 3vw;
 }
 
 ul {
@@ -24,6 +25,6 @@ a {
 }
 
 .pages{
-    margin-right: 3vw;
+    padding-right: 3vw;
     font-size: 1.5rem;
 }
