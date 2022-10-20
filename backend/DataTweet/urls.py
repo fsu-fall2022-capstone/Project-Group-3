@@ -16,7 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from django.conf.urls import include
+from django.template.defaulttags import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('api.urls')),
+    #path('DataTweetApi/', include('DataTweetApi.urls')),
+    url(r'^',include('DataTweetApi.urls'))
 ]
