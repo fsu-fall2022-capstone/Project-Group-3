@@ -12,6 +12,11 @@ function Home(){
                     <button type="submit">Post</button>
                     </form>
                 </div>
+
+                <div className = 'posts'>
+                    
+                </div>
+
             </div>
         </div>
     )

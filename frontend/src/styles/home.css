@@ -82,5 +82,6 @@
     transform: translateY(-1px);
 }
 
-
-
+.posts{
+    margin-top: 15px;
+}
