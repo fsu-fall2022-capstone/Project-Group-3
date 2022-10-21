@@ -4,6 +4,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Profile from './components/Profile';
 import Navbar from './components/Navbar';
+import SearchBar from './components/Search';
 import PrivateRoute from './Utilities/PrivateRoute';
 import { UserContext } from '.';
 import "./index.css";
@@ -18,6 +19,7 @@ function App() {
         <Navbar />
       }
       <div className='app'>
+      <SearchBar/>
         <Routes>
         <Route path="/" element={
             <PrivateRoute>
