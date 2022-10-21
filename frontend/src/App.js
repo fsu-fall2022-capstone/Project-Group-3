@@ -3,6 +3,8 @@ import {Route, Routes} from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import Profile from './components/Profile';
+import Login from './components/Login';
+import Register from './components/Register';
 import Navbar from './components/Navbar';
 import SearchBar from './components/Search';
 import PrivateRoute from './Utilities/PrivateRoute';
@@ -29,6 +31,8 @@ function App() {
         />
           <Route path = '/about' element = {<About />} />
           <Route path = '/profile' element = {<Profile />} />
+          <Route path = '/login' element = {<Login />} />
+          <Route path = '/register' element = {<Register />} />
         </Routes>
       </div>
       </>
