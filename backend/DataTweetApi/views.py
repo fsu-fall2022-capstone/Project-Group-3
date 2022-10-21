@@ -9,11 +9,11 @@ from . import serializers
 
 # Create your views here.
 
+#this is just a test function to add a new user to the database
 @csrf_exempt
 def index(request):
-    x = {'Username': 'toch','Password': 'pass','Email': 'email', 'About': 'nothing','RoleLvl': 2}
+    x = {'Username': 'toch','Password': 'pass','Email': 'tc18cj@fsu.edu', 'About': 'nothing','RoleLvl': 2, 'FirstName': 'Tommy', 'LastName': 'Chong'}
     users_serializer = serializers.UsersSerializer(data=x)
-    print(users_serializer)
     if users_serializer.is_valid():
         users_serializer.save()
         return JsonResponse("Added Successfully", safe=False)
