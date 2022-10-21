@@ -1,6 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 import "../styles/navbar.css";
+import LoginButton from './Login';
+import LogoutButton from './Logout';
 
 export default function Navbar() {
   return (
@@ -16,10 +18,10 @@ export default function Navbar() {
           <Link to="/profile">Profile</Link>
         </li>
         <li>
-          <Link to="/login">Login</Link>
+          <LoginButton>Login</LoginButton>
         </li>
         <li>
-          <Link to="/logout">Logout</Link>
+          <LogoutButton>Logout</LogoutButton>
         </li>
       </ul>
     </nav>
