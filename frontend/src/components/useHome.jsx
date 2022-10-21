@@ -1,5 +1,5 @@
 import { useReducer, useContext } from "react"
-import Axios from "axios"
+import { create_post } from "../Utilities/FetchFunction"
 
 
 const useHome = () => {
@@ -7,7 +7,18 @@ const useHome = () => {
 
     const submit = (e) => {
         e.preventDefault()
-        console.log(info.post)
+
+        let data = {'Username': 'toch', 'PostFileName': null, 'Description': info.post, 'Tags': null}
+        setInfo({hasSubmitted: true})
+        create_post(data)
+        .then(res => {
+            if(res === 200){
+                setInfo({hasSubmitted: false, post: '', hasError: false})
+            }
+            else{
+                setInfo({hasSubmitted: false, hasError: true})
+            }
+        })
     }
 
 

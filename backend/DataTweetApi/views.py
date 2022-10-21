@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.http.response import JsonResponse
 from . import models
 from . import serializers
+import json
+import datetime
 
 # Create your views here.
 
@@ -21,6 +23,20 @@ def index(request):
 
 def say_hello(request):
     return render(request,"Hello World!")
+
+@csrf_exempt
+def create_post(request):
+    if(request.method == 'POST'):
+        data = json.loads(request.body)
+        data['PostedWhen'] = datetime.datetime.now()
+        post = serializers.PostsSerializer(data=data)
+        if post.is_valid():
+            post.save()
+            return HttpResponse(200)
+        else:
+            return HttpResponse(400)
+
+    return HttpResponse(400)
 
 @csrf_exempt
 def usersApi(request, id=0):

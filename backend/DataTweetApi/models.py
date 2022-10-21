@@ -13,7 +13,8 @@ class users(models.Model):
 
 class posts(models.Model):
     PostID = models.AutoField(primary_key=True)
-    PostFileName = models.CharField(max_length=64)
+    PostFileName = models.CharField(max_length=64, null = True)
     Username = models.ForeignKey(to=users, on_delete=models.CASCADE)
     PostedWhen = models.DateTimeField()
-    Tags = models.CharField(max_length=500)
+    Tags = models.CharField(max_length=500, null = True)
+    Description = models.CharField(max_length = 500)
