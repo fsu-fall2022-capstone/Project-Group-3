@@ -17,10 +17,6 @@ function App() {
 
   return (
     <>
-    <Auth0Provider
-      domain="dev-ws6kun7d.us.auth0.com"
-      clientId="O8UPE16hieshlepkC9taYRYyjopYiAc6"
-      redirectUri={window.location.origin}>
       {
         user.isLoggedIn &&
         <Navbar />
@@ -40,7 +36,7 @@ function App() {
           <Route path = '/logout' element = {<LogoutButton />} />
         </Routes>
       </div>
-    </Auth0Provider>
+    
     </>
   );
 }
