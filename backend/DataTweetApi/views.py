@@ -1,7 +1,10 @@
 from django.core.files.storage import default_storage
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
+from django.contrib import messages
 from django.http import HttpResponse
 from django.http.response import JsonResponse
 from . import models
@@ -81,3 +84,17 @@ def SaveFile(request):
     file=request.FILES['file']
     file_name=default_storage.save(file.name,file)
     return JsonResponse(file_name,safe=False)
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            messages.success(request, f'Your account has been created. You can log in now!')    
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+
+    context = {'form': form}
+    return render(request, 'users/register.html', context)
