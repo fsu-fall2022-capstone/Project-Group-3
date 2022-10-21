@@ -3,6 +3,7 @@ import "../styles/home.css";
 import useHome from './useHome';
 import Alert from '@mui/material/Alert';
 import { CircularProgress } from '@mui/material';
+import PostsList from './PostsList';
 
 function Home(){
     const {info, setInfo, submit} = useHome()
@@ -26,7 +27,7 @@ function Home(){
                 </div>
 
                 <div className = 'posts'>
-                    
+                    <PostsList />
                 </div>
 
             </div>
