@@ -15,6 +15,12 @@ export default function Navbar() {
         <li>
           <Link to="/profile">Profile</Link>
         </li>
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+        <li>
+          <Link to="/register">About</Link>
+        </li>
       </ul>
     </nav>
   );
