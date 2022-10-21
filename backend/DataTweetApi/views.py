@@ -9,8 +9,15 @@ from . import serializers
 
 # Create your views here.
 
+@csrf_exempt
 def index(request):
-    return HttpResponse(200)
+    x = {'Username': 'toch','Password': 'pass','Email': 'email', 'About': 'nothing','RoleLvl': 2}
+    users_serializer = serializers.UsersSerializer(data=x)
+    print(users_serializer)
+    if users_serializer.is_valid():
+        users_serializer.save()
+        return JsonResponse("Added Successfully", safe=False)
+    return JsonResponse("Failed to Add", safe=False)
 
 def say_hello(request):
     return render(request,"Hello World!")
@@ -44,29 +51,7 @@ def usersApi(request, id=0):
 
 @csrf_exempt
 def postApi(request, id=0):
-    if request.method == 'GET':
-        posts = models.Posts.objects.all()
-        posts_serializer = serializers.PostsSerializer(posts, many=True)
-        return JsonResponse(posts_serializer.data, safe=False)
-    elif request.method == 'POST':
-        post_data = JSONParser().parse(request)
-        posts_serializer = serializers.PostsSerializer(data=post_data)
-        if posts_serializer.is_valid():
-            posts_serializer.save()
-            return JsonResponse("Added Successfully", safe=False)
-        return JsonResponse("Failed to Add", safe=False)
-    elif request.method == 'PUT':
-        post_data = JSONParser().parse(request)
-        post = models.Posts.objects.get(PostsId=post_data['PostsId'])
-        posts_serializer = serializers.PostsSerializer(post, data=post_data)
-        if posts_serializer.is_valid():
-            posts_serializer.save()
-            return JsonResponse("Updated Successfully", safe=False)
-        return JsonResponse("Failed to Update")
-    elif request.method == 'DELETE':
-        post = models.Posts.objects.get(PostsId=id)
-        post.delete()
-        return JsonResponse("Deleted Successfully", safe=False)
+    return HttpResponse(200)
 @csrf_exempt
 def SaveFile(request):
     file=request.FILES['file']

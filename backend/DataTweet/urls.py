@@ -22,5 +22,5 @@ from django.template.defaulttags import url
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('DataTweetApi/', include('DataTweetApi.urls')),
-    url(r'^',include('DataTweetApi.urls'))
+    path('',include('DataTweetApi.urls'))
 ]
