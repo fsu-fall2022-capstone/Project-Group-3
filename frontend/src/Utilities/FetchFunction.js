@@ -17,3 +17,9 @@ export async function create_post(body){
 
     return await response.data
 }
+
+export async function get_posts(){
+    const response = await Axios.get(`${fetch_url}get_posts`)
+
+    return response
+}

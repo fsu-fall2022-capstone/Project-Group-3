@@ -39,6 +39,14 @@ def create_post(request):
     return HttpResponse(400)
 
 @csrf_exempt
+def get_posts(request):
+    if(request.method == 'GET'):
+        posts = models.posts.objects.all()
+        posts_json = serializers.PostsSerializer(posts, many= True)
+        return JsonResponse(posts_json.data, safe=False)
+    return HttpResponse(400)
+
+@csrf_exempt
 def usersApi(request, id=0):
     if request.method == 'GET':
         users = models.Users.objects.all()
