@@ -4,9 +4,9 @@ from . import models
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.users
-        fields=('Username','Password','Email', 'About','RoleLvl')
+        fields=('Username', 'FirstName', 'LastName', 'Password','Email', 'About','RoleLvl')
 
 class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.posts
-        fields=('PostID','PostFileName','Username', 'PostedWhen','Tags')
+        fields=('PostFileName','Username', 'Description', 'PostedWhen','Tags')

@@ -6,14 +6,16 @@ from django.http import HttpResponse
 from django.http.response import JsonResponse
 from . import models
 from . import serializers
+import json
+import datetime
 
 # Create your views here.
 
+#this is just a test function to add a new user to the database
 @csrf_exempt
 def index(request):
-    x = {'Username': 'toch','Password': 'pass','Email': 'email', 'About': 'nothing','RoleLvl': 2}
+    x = {'Username': 'toch','Password': 'pass','Email': 'tc18cj@fsu.edu', 'About': 'nothing','RoleLvl': 2, 'FirstName': 'Tommy', 'LastName': 'Chong'}
     users_serializer = serializers.UsersSerializer(data=x)
-    print(users_serializer)
     if users_serializer.is_valid():
         users_serializer.save()
         return JsonResponse("Added Successfully", safe=False)
@@ -21,6 +23,20 @@ def index(request):
 
 def say_hello(request):
     return render(request,"Hello World!")
+
+@csrf_exempt
+def create_post(request):
+    if(request.method == 'POST'):
+        data = json.loads(request.body)
+        data['PostedWhen'] = datetime.datetime.now()
+        post = serializers.PostsSerializer(data=data)
+        if post.is_valid():
+            post.save()
+            return HttpResponse(200)
+        else:
+            return HttpResponse(400)
+
+    return HttpResponse(400)
 
 @csrf_exempt
 def usersApi(request, id=0):
