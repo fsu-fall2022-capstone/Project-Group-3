@@ -7,7 +7,7 @@ import { get_posts } from '../Utilities/FetchFunction'
 
 
 function PostsList() {
-    const [posts, setPosts] = useState()
+    const [posts, setPosts] = useState([])
 
     useEffect(() => {
         get_posts()
@@ -23,14 +23,14 @@ function PostsList() {
                 console.log(posts)
             }
             {
-                dummyInfo.map((post, key) => (
-                    <div className = 'postscard'>
+                posts.map((post, key) => (
+                    <div className = 'postscard' key = {key}>
                         <div className = 'header'>
                         <img src = {user} alt= "" className = 'usericon'></img>
                         <div className = 'header-info'>
-                        {post.firstname} {post.lastname} <span>@{post.username} . {post.timeCreated}</span> 
+                        {post.firstname} {post.lastname} <span>@{post.Username} . {post.PostedWhen.replace('T', ' ')}</span> 
                         <p>
-                            {post.post}
+                            {post.Description}
                         </p>
                         </div>
                         </div>
