@@ -1,3 +1,4 @@
+from email.utils import parsedate_to_datetime
 from django.core.files.storage import default_storage
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
@@ -31,7 +32,7 @@ def say_hello(request):
 def create_post(request):
     if(request.method == 'POST'):
         data = json.loads(request.body)
-        data['PostedWhen'] = datetime.datetime.now()
+        data['PostedWhen'] = datetime.datetime.strptime(datetime.datetime.now().strftime('%m/%d/%y %H:%M:%S'), '%m/%d/%y %H:%M:%S') 
         post = serializers.PostsSerializer(data=data)
         if post.is_valid():
             post.save()
@@ -44,9 +45,12 @@ def create_post(request):
 @csrf_exempt
 def get_posts(request):
     if(request.method == 'GET'):
-        posts = models.posts.objects.all()
+        posts = models.posts.objects.all().order_by('-PostedWhen')
         posts_json = serializers.PostsSerializer(posts, many= True)
-        return JsonResponse(posts_json.data, safe=False)
+        if(posts_json):
+            return JsonResponse(posts_json.data, safe=False)
+
+        return HttpResponse(400)
     return HttpResponse(400)
 
 @csrf_exempt
