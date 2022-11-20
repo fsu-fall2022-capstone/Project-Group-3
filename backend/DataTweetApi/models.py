@@ -18,11 +18,3 @@ class posts(models.Model):
     PostedWhen = models.DateTimeField()
     Tags = models.CharField(max_length=500, null = True)
     Description = models.CharField(max_length = 500)
-
-    @property
-    def FirstName(self):
-        return self.Username.FirstName
-    
-    @property
-    def LastName(self):
-        return self.Username.LastName

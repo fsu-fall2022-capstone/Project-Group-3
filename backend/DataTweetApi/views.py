@@ -12,6 +12,7 @@ from . import models
 from . import serializers
 import json
 import datetime
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 
@@ -46,7 +47,8 @@ def create_post(request):
 def get_posts(request):
     if(request.method == 'GET'):
         posts = models.posts.objects.all().order_by('-PostedWhen')
-        posts_json = serializers.PostsSerializer(posts, many= True)
+        posts_json = serializers.GetPostsSerializer(posts, many= True)
+
         if(posts_json):
             return JsonResponse(posts_json.data, safe=False)
 
