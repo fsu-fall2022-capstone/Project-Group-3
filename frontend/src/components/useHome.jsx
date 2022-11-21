@@ -10,7 +10,7 @@ const useHome = () => {
         
         if(info.post && info.file){
             if(info.file.type === 'text/csv'){
-                //uploading the file to an S3 aws bucket first
+                
                 setInfo({hasSubmitted: true})
                 const formData = new FormData()
                 
