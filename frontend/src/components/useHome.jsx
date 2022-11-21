@@ -1,13 +1,18 @@
 import { useReducer, useContext } from "react"
-import { create_post, upload_file } from "../Utilities/FetchFunction"
+import { create_post} from "../Utilities/FetchFunction"
+import { UserContext } from '..';
 
+import { useAuth0 } from "@auth0/auth0-react";
 
 const useHome = () => {
     const [info, setInfo] = useReducer(infoReducer, initialInfo)
+    const {user} = useContext(UserContext)
+    const { loginWithRedirect } = useAuth0();
 
     const submit = (e) => {
         e.preventDefault()
         
+        if(user.isLoggedIn){
         if(info.post && info.file){
             if(info.file.type === 'text/csv'){
                 
@@ -37,7 +42,10 @@ const useHome = () => {
         else{
             setInfo({hasSubmitted: false, hasError: true, errorMessage: "Please upload a file and/or write a description."})
         }
-
+        }
+        else{
+            loginWithRedirect()
+        }
     }
 
 

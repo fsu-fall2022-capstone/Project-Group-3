@@ -13,7 +13,6 @@ function PostsList() {
         get_posts()
         .then(res =>{
             setPosts(res.data)
-            console.log(res.data)
         })
 
     }, [])

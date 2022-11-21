@@ -7,7 +7,6 @@ import LoginButton from './components/Login';
 import LogoutButton from './components/Logout';
 import Navbar from './components/Navbar';
 import SearchBar from './components/Search';
-import PrivateRoute from './Utilities/PrivateRoute';
 import { UserContext } from '.';
 import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
@@ -17,19 +16,11 @@ function App() {
 
   return (
     <>
-      {
-        user.isLoggedIn &&
-        <Navbar />
-      }
+      <Navbar />
       <div className='app'>
       <SearchBar/>
         <Routes>
-        <Route path="/" element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          }
-        />
+          <Route path="/" element={<Home />} />
           <Route path = '/about' element = {<About />} />
           <Route path = '/profile' element = {<Profile />} />
           <Route path = '/login' element = {<LoginButton />} />
