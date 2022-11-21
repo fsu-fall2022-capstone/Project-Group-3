@@ -9,22 +9,16 @@ const useHome = () => {
         e.preventDefault()
         
         if(info.post && info.file){
-            console.log(info.file)
             if(info.file.type === 'text/csv'){
                 //uploading the file to an S3 aws bucket first
                 setInfo({hasSubmitted: true})
                 const formData = new FormData()
-                formData.append("file", info.file)
-                formData.append("username", "toch")
-                upload_file(formData)
-                .then(res =>{
-                    
-                })
-
-                /*
-                let data = {'Username': 'toch', 'PostFileName': null, 'Description': info.post, 'Tags': null}
                 
-                create_post(data)
+                formData.append("csv_file", info.file)
+                formData.append("Username", "toch")
+                formData.append("Description", info.post)
+                formData.append("Tags", null)
+                create_post(formData)
                 .then(res => {
                     if(res === 200){
                         setInfo({hasSubmitted: false, post: '', hasError: false})
@@ -32,7 +26,7 @@ const useHome = () => {
                     else{
                         setInfo({hasSubmitted: false, hasError: true, errorMessage: "Error in posting, please try again."})
                     }
-                }) */
+                }) 
 
             }
             else{

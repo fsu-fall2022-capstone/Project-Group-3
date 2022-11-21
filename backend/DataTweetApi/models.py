@@ -13,7 +13,7 @@ class users(models.Model):
 
 class posts(models.Model):
     PostID = models.AutoField(primary_key=True)
-    PostFileName = models.CharField(max_length=64, null = True)
+    File = models.FileField(upload_to='media/', null = True)
     Username = models.ForeignKey(to=users, on_delete=models.CASCADE, related_name='user')
     PostedWhen = models.DateTimeField()
     Tags = models.CharField(max_length=500, null = True)
