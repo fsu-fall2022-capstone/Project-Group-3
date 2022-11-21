@@ -11,7 +11,7 @@ export async function create_post(body){
     Axios.defaults.xsrfCookieName = "csrftoken";
     const response = await Axios.post(`${fetch_url}create_post`, body, {
         headers:{
-            'Content-Type': '"application/json"'
+            'Content-Type': 'multipart/form-data'
         }
     })
 

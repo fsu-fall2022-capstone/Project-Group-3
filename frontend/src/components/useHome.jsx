@@ -1,5 +1,5 @@
 import { useReducer, useContext } from "react"
-import { create_post } from "../Utilities/FetchFunction"
+import { create_post, upload_file } from "../Utilities/FetchFunction"
 
 
 const useHome = () => {
@@ -7,18 +7,37 @@ const useHome = () => {
 
     const submit = (e) => {
         e.preventDefault()
+        
+        if(info.post && info.file){
+            if(info.file.type === 'text/csv'){
+                
+                setInfo({hasSubmitted: true})
+                const formData = new FormData()
+                
+                formData.append("csv_file", info.file)
+                formData.append("Username", "toch")
+                formData.append("Description", info.post)
+                formData.append("Tags", null)
+                create_post(formData)
+                .then(res => {
+                    if(res === 200){
+                        setInfo({hasSubmitted: false, post: '', file: null, hasError: false})
+                        window.location.reload(true)
+                    }
+                    else{
+                        setInfo({hasSubmitted: false, hasError: true, errorMessage: "Error in posting, please try again."})
+                    }
+                }) 
 
-        let data = {'Username': 'toch', 'PostFileName': null, 'Description': info.post, 'Tags': null}
-        setInfo({hasSubmitted: true})
-        create_post(data)
-        .then(res => {
-            if(res === 200){
-                setInfo({hasSubmitted: false, post: '', hasError: false})
             }
             else{
-                setInfo({hasSubmitted: false, hasError: true})
+                setInfo({hasSubmitted: false, hasError: true, errorMessage: "File must be in csv format"})
             }
-        })
+        }
+        else{
+            setInfo({hasSubmitted: false, hasError: true, errorMessage: "Please upload a file and/or write a description."})
+        }
+
     }
 
 
@@ -30,7 +49,9 @@ export default useHome
 
 const initialInfo = {
     post: '',
+    file: null,
     hasError: false,
+    errorMessage: '',
     hasSubmitted: false
 }
 

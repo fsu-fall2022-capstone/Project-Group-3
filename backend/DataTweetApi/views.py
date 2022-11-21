@@ -26,15 +26,17 @@ def index(request):
         return JsonResponse("Added Successfully", safe=False)
     return JsonResponse("Failed to Add", safe=False)
 
-def say_hello(request):
-    return render(request,"Hello World!")
 
 @csrf_exempt
 def create_post(request):
     if(request.method == 'POST'):
-        data = json.loads(request.body)
-        data['PostedWhen'] = datetime.datetime.strptime(datetime.datetime.now().strftime('%m/%d/%y %H:%M:%S'), '%m/%d/%y %H:%M:%S') 
-        post = serializers.PostsSerializer(data=data)
+        Username = request.POST['Username']
+        File = request.FILES['csv_file']
+        Description = request.POST['Description']
+        Tags = request.POST['Tags']
+        form = {"Username": Username, "File": File, "Description": Description, "Tags": Tags}
+        form['PostedWhen'] = datetime.datetime.strptime(datetime.datetime.now().strftime('%m/%d/%y %H:%M:%S'), '%m/%d/%y %H:%M:%S') 
+        post = serializers.PostsSerializer(data=form)
         if post.is_valid():
             post.save()
             return HttpResponse(200)
