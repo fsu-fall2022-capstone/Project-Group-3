@@ -10,6 +10,7 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('create_post', views.create_post),
     path('get_posts', views.get_posts),
+    path('upload_file', views.upload_file),
     path("register", views.register, name="register"),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

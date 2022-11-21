@@ -26,8 +26,13 @@ def index(request):
         return JsonResponse("Added Successfully", safe=False)
     return JsonResponse("Failed to Add", safe=False)
 
-def say_hello(request):
-    return render(request,"Hello World!")
+@csrf_exempt
+def upload_file(request):
+    if(request.method == 'POST'):
+        print(request.POST['username'])
+        return HttpResponse(200)
+
+    return HttpResponse(400)
 
 @csrf_exempt
 def create_post(request):
