@@ -21,7 +21,8 @@ const useHome = () => {
                 create_post(formData)
                 .then(res => {
                     if(res === 200){
-                        setInfo({hasSubmitted: false, post: '', hasError: false})
+                        setInfo({hasSubmitted: false, post: '', file: null, hasError: false})
+                        window.location.reload(true)
                     }
                     else{
                         setInfo({hasSubmitted: false, hasError: true, errorMessage: "Error in posting, please try again."})
