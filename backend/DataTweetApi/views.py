@@ -26,6 +26,23 @@ def index(request):
         return JsonResponse("Added Successfully", safe=False)
     return JsonResponse("Failed to Add", safe=False)
 
+@csrf_exempt
+def create_user(request):
+    x = {'Username': request.POST['email'],'Password': 'xxx','Email': request.POST['email'],
+    'About': 'nothing','RoleLvl': 2, 'FirstName': request.POST['given_name'], 'LastName': request.POST['given_name']}
+    users_serializer = serializers.UsersSerializer(data=x)
+    if users_serializer.is_valid():
+        users_serializer.save()
+        return JsonResponse("Added Successfully", safe=False)
+    return JsonResponse("Could not add to user", safe=False)
+
+@csrf_exempt
+def get_users(request):
+    if request.method == 'GET':
+        users = models.users.objects.all()
+        users_serializer = serializers.UsersSerializer(users, many=True)
+        return JsonResponse(users_serializer.data, safe=False)
+
 
 @csrf_exempt
 def create_post(request):

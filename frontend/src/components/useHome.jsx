@@ -1,71 +1,79 @@
-import { useReducer, useContext } from "react"
-import { create_post} from "../Utilities/FetchFunction"
-import { UserContext } from '..';
+import { useReducer, useContext } from "react";
+import { create_post } from "../Utilities/FetchFunction";
+import { UserContext } from "..";
 
 import { useAuth0 } from "@auth0/auth0-react";
 
 const useHome = () => {
-    const [info, setInfo] = useReducer(infoReducer, initialInfo)
-    const {user} = useContext(UserContext)
-    const { loginWithRedirect } = useAuth0();
+  const [info, setInfo] = useReducer(infoReducer, initialInfo);
+  const { user } = useContext(UserContext);
+  const { loginWithRedirect } = useAuth0();
 
-    const submit = (e) => {
-        e.preventDefault()
-        
-        if(user.isLoggedIn){
-        if(info.post && info.file){
-            if(info.file.type === 'text/csv'){
-                
-                setInfo({hasSubmitted: true})
-                const formData = new FormData()
-                
-                formData.append("csv_file", info.file)
-                formData.append("Username", "toch")
-                formData.append("Description", info.post)
-                formData.append("Tags", null)
-                create_post(formData)
-                .then(res => {
-                    if(res === 200){
-                        setInfo({hasSubmitted: false, post: '', file: null, hasError: false})
-                        window.location.reload(true)
-                    }
-                    else{
-                        setInfo({hasSubmitted: false, hasError: true, errorMessage: "Error in posting, please try again."})
-                    }
-                }) 
+  const submit = (e) => {
+    e.preventDefault();
 
+    if (user.isLoggedIn) {
+      if (info.post && info.file) {
+        if (info.file.type === "text/csv") {
+          setInfo({ hasSubmitted: true });
+          const formData = new FormData();
+
+          formData.append("csv_file", info.file);
+          formData.append("Username", "toch");
+          formData.append("Description", info.post);
+          formData.append("Tags", null);
+          create_post(formData).then((res) => {
+            if (res === 200) {
+              setInfo({
+                hasSubmitted: false,
+                post: "",
+                file: null,
+                hasError: false,
+              });
+              window.location.reload(true);
+            } else {
+              setInfo({
+                hasSubmitted: false,
+                hasError: true,
+                errorMessage: "Error in posting, please try again.",
+              });
             }
-            else{
-                setInfo({hasSubmitted: false, hasError: true, errorMessage: "File must be in csv format"})
-            }
+          });
+        } else {
+          setInfo({
+            hasSubmitted: false,
+            hasError: true,
+            errorMessage: "File must be in csv format",
+          });
         }
-        else{
-            setInfo({hasSubmitted: false, hasError: true, errorMessage: "Please upload a file and/or write a description."})
-        }
-        }
-        else{
-            loginWithRedirect()
-        }
+      } else {
+        setInfo({
+          hasSubmitted: false,
+          hasError: true,
+          errorMessage: "Please upload a file and/or write a description.",
+        });
+      }
+    } else {
+      loginWithRedirect();
     }
+  };
 
+  return { info, setInfo, submit };
+};
 
-    return {info, setInfo, submit}
-}
-
-export default useHome
-
+export default useHome;
 
 const initialInfo = {
-    post: '',
-    file: null,
-    hasError: false,
-    errorMessage: '',
-    hasSubmitted: false
-}
+  post: "",
+  file: null,
+  hasError: false,
+  errorMessage: "",
+  hasSubmitted: false,
+};
 
 const infoReducer = (state, action) => {
-    return {
-        ...state,
-        ...action
-    }
-}
+  return {
+    ...state,
+    ...action,
+  };
+};
