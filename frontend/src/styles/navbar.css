@@ -1,30 +1,40 @@
 .nav {
-    color: white;
-    background-color: #00FF7F;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 3em;
-    width: 100%;
+  color: white;
+  background-color: #00ff7f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 3em;
+  width: 100%;
 }
 
-.site-name{
-    font-size: 2rem;
-    padding-left: 3vw;
+.site-name {
+  font-size: 2rem;
+  padding-left: 3vw;
 }
 
 ul {
-    list-style: none;
-    display: flex;
-    gap: 1em;
+  list-style: none;
+  display: flex;
+  gap: 1em;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+  color: inherit;
+  text-decoration: none;
 }
 
-.pages{
-    padding-right: 3vw;
-    font-size: 1.5rem;
+.pages {
+  padding-right: 3vw;
+  font-size: 1.5rem;
+}
+
+.login {
+  background-color: #fff;
+  font-family: "Times New Roman";
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #00ff7f;
+  font-size: 1.2rem;
 }
