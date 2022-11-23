@@ -1,29 +1,30 @@
-import {useReducer} from "react"
+import { useReducer } from "react";
 
 const useUser = () => {
-    const [user, setUser] = useReducer(reducer, userInitialState)
+  const [userContext, setUser] = useReducer(reducer, userInitialState);
 
-    return {user, setUser}
-}
+  return { userContext, setUser };
+};
 
-export default useUser
+export default useUser;
 
 const userInitialState = {
-    firstname:'',
-    lastname:'',
-    email:'',
-    isLoggedIn: true
-}
+  firstname: "",
+  lastname: "",
+  email: "",
+  username: "",
+  isLoggedIn: true,
+};
 
 export const reducer = (state, action) => {
-    switch(action.type){
-        case 'modify':
-            return {...state, ...action.value}
+  switch (action.type) {
+    case "modify":
+      return { ...state, ...action.value };
 
-        case 'logout':
-            return {...userInitialState, isLoggedIn:false}
+    case "logout":
+      return { ...userInitialState, isLoggedIn: false };
 
-        default:
-            return userInitialState
-    }
-}
+    default:
+      return userInitialState;
+  }
+};

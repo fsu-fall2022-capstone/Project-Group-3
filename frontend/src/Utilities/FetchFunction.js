@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 import { fetch_url } from "..";
 
 export async function get_index() {
@@ -40,4 +41,12 @@ export async function get_users() {
   const response = await Axios.get(`${fetch_url}get_users`);
 
   return response;
+}
+
+export async function get_current_user(body) {
+  let payload = { email: body };
+  const params = new URLSearchParams(payload);
+  const response = await Axios.get(`${fetch_url}get_current_user?${params}`);
+
+  return response.data[0];
 }

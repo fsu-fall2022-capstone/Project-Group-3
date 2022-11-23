@@ -1,25 +1,34 @@
 import { useReducer, useContext } from "react";
-import { create_post } from "../Utilities/FetchFunction";
+import { create_post, get_current_user } from "../Utilities/FetchFunction";
 import { UserContext } from "..";
-
+import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const useHome = () => {
   const [info, setInfo] = useReducer(infoReducer, initialInfo);
-  const { user } = useContext(UserContext);
-  const { loginWithRedirect } = useAuth0();
+  const { user, loginWithRedirect } = useAuth0();
+  const [current, setCurrent] = useState("");
+
+  useEffect(() => {
+    async function getCurrent() {
+      if (!!user) {
+        const response = await get_current_user(user.email);
+        setCurrent(response);
+      }
+    }
+    getCurrent().catch(console.error);
+  }, [user]);
 
   const submit = (e) => {
     e.preventDefault();
-
-    if (user.isLoggedIn) {
+    if (!!current) {
       if (info.post && info.file) {
         if (info.file.type === "text/csv") {
           setInfo({ hasSubmitted: true });
           const formData = new FormData();
 
           formData.append("csv_file", info.file);
-          formData.append("Username", "toch");
+          formData.append("Username", current.Username);
           formData.append("Description", info.post);
           formData.append("Tags", null);
           create_post(formData).then((res) => {

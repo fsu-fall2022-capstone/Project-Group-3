@@ -29,7 +29,7 @@ def index(request):
 @csrf_exempt
 def create_user(request):
     x = {'Username': request.POST['email'],'Password': 'xxx','Email': request.POST['email'],
-    'About': 'nothing','RoleLvl': 2, 'FirstName': request.POST['given_name'], 'LastName': request.POST['given_name']}
+    'About': 'nothing','RoleLvl': 2, 'FirstName': request.POST['given_name'], 'LastName': request.POST['family_name']}
     users_serializer = serializers.UsersSerializer(data=x)
     if users_serializer.is_valid():
         users_serializer.save()
@@ -40,6 +40,12 @@ def create_user(request):
 def get_users(request):
     if request.method == 'GET':
         users = models.users.objects.all()
+        users_serializer = serializers.UsersSerializer(users, many=True)
+        return JsonResponse(users_serializer.data, safe=False)
+
+def get_current_user(request):
+    if request.method == 'GET':
+        users = models.users.objects.filter(Username=request.GET['email'])
         users_serializer = serializers.UsersSerializer(users, many=True)
         return JsonResponse(users_serializer.data, safe=False)
 
