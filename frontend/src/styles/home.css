@@ -35,7 +35,7 @@
     flex-direction: column;
 }
 
-.tweet form button{
+.tweet form .post{
     margin-top: 5px;
     width: 130px;
     height: 45px;
@@ -68,14 +68,14 @@
     box-shadow: 0 0 10px rgba(46, 229, 157, 0.4);
 }
 
-.tweet form button:hover{
+.tweet form .post:hover{
     background-color: #23c483;
     box-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
     color: #fff;
     transform: translateY(-1px);
 }
 
-.tweet form button:active {
+.tweet form .post:active {
     transform: translateY(-1px);
 }
 
