@@ -4,14 +4,18 @@ import user from "../assets/user.png";
 import { useEffect, useState } from "react";
 import { get_posts } from "../Utilities/FetchFunction";
 
-function PostsList() {
-  const [posts, setPosts] = useState([]);
+function PostsList(props) {
+  let [posts, setPosts] = useState([]);
 
   useEffect(() => {
     get_posts().then((res) => {
       setPosts(res.data);
     });
   }, []);
+  if (!!props.username)
+    posts = posts.filter(function(el) {
+      return el.Username == props.username;
+    });
 
   return (
     <div className="postslist">
