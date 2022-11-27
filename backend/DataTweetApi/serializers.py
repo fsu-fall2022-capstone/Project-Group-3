@@ -4,7 +4,7 @@ from . import models
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.users
-        fields=('Username', 'FirstName', 'LastName', 'Password','Email', 'About','RoleLvl')
+        fields='__all__'
 
 class GetPostsSerializer(serializers.ModelSerializer):
     FirstName = serializers.CharField(source = 'Username.FirstName')

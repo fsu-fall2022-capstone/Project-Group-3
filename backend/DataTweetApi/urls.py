@@ -11,6 +11,7 @@ urlpatterns = [
     path('create_post', views.create_post),
     path('get_posts', views.get_posts),
     path('create_user', views.create_user),
+    path('update_user', views.update_user),
     path('get_users', views.get_users),
     path('get_current_user', views.get_current_user),
     path("register", views.register, name="register"),
