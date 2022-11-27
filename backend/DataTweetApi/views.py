@@ -28,13 +28,18 @@ def index(request):
 
 @csrf_exempt
 def create_user(request):
-    x = {'Username': request.POST['email'],'Password': 'xxx','Email': request.POST['email'],
-    'About': 'nothing','RoleLvl': 2, 'FirstName': request.POST['given_name'], 'LastName': request.POST['family_name']}
-    users_serializer = serializers.UsersSerializer(data=x)
-    if users_serializer.is_valid():
-        users_serializer.save()
+    try:
+        x = {'Username': request.POST['email'],'Password': 'xxx','Email': request.POST['email'], 'About': 'nothing',
+        'RoleLvl': 2, 'FirstName': request.POST.get('given_name', 'anonymous'), 'LastName': request.POST.get('family_name', 'anonymous')}
+        users_serializer = serializers.UsersSerializer(data=x)
+        if users_serializer.is_valid():
+            users_serializer.save()
         return JsonResponse("Added Successfully", safe=False)
-    return JsonResponse("Could not add to user", safe=False)
+    except:
+        print("Could not add user")
+        return JsonResponse("Could not add to user", safe=False)
+    
+    
 
 @csrf_exempt
 def get_users(request):

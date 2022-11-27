@@ -1,6 +1,7 @@
 import { useReducer, useContext } from "react";
 import { create_post, get_current_user } from "../Utilities/FetchFunction";
 import { UserContext } from "..";
+import { updateUsers } from "../Utilities/updateUsers";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -8,16 +9,21 @@ const useHome = () => {
   const [info, setInfo] = useReducer(infoReducer, initialInfo);
   const { user, loginWithRedirect } = useAuth0();
   const [current, setCurrent] = useState("");
+  let updatedUser = false;
 
   useEffect(() => {
     async function getCurrent() {
       if (!!user) {
-        const response = await get_current_user(user.email);
+        let response = await get_current_user(user.email);
+        if (!response) {
+          updatedUser = await updateUsers(user);
+          response = await get_current_user(user.email);
+        }
         setCurrent(response);
       }
     }
     getCurrent().catch(console.error);
-  }, [user]);
+  }, [user, updatedUser]);
 
   const submit = (e) => {
     e.preventDefault();
