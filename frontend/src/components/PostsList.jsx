@@ -16,7 +16,49 @@ function PostsList(props) {
     posts = posts.filter(function(el) {
       return el.Username == props.username;
     });
-
+  
+  const [likeCount, setLikeCount] = useState(50);
+  const [dislikeCount, setDislikeCount] = useState(25);
+    
+  const [activeBtn, setActiveBtn] = useState("none");
+  const handleLikeClick = () => {
+    if (activeBtn === "none") {
+      setLikeCount(likeCount + 1);
+      setActiveBtn("like");
+      return;
+    }
+  
+    if (activeBtn === 'like'){
+      setLikeCount(likeCount - 1);
+      setActiveBtn("none");
+      return;
+    }
+  
+    if (activeBtn === "dislike") {
+      setLikeCount(likeCount + 1);
+      setDislikeCount(dislikeCount - 1);
+      setActiveBtn("like");
+    }
+  };
+  const handleDisikeClick = () => {
+    if (activeBtn === "none") {
+      setDislikeCount(dislikeCount + 1);
+      setActiveBtn("dislike");
+      return;
+    }
+   
+    if (activeBtn === 'dislike'){
+      setDislikeCount(dislikeCount - 1);
+      setActiveBtn("none");
+      return;
+    }
+ 
+    if (activeBtn === "like") {
+      setDislikeCount(dislikeCount + 1);
+      setLikeCount(likeCount - 1);
+      setActiveBtn("dislike");
+    }
+  };
   return (
     <div className="postslist">
       {posts.map((post, key) => (
@@ -31,7 +73,25 @@ function PostsList(props) {
               <p>{post.Description}</p>
             </div>
           </div>
-          {/*where graph visualization goes*/}
+          <div className="likedislike">
+            <div className="btn-container">
+              <button
+                className={`btn ${activeBtn === "like" ? "like-active" : ""}`}
+                onClick={handleLikeClick}
+              >
+                <span className="">thumb_up</span>
+                Like {likeCount}
+              </button>
+          
+              <button
+                className={`btn ${activeBtn === "dislike" ? "dislike-active" : ""}`}
+                onClick={handleDisikeClick}
+              >
+                <span className="">thumb_down</span>
+                Dislike {dislikeCount}
+              </button>
+            </div>
+          </div>
         </div>
       ))}
     </div>
