@@ -3,6 +3,7 @@ import "../styles/post.css";
 import user from "../assets/user.png";
 import { useEffect, useState } from "react";
 import { get_posts } from "../Utilities/FetchFunction";
+import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 
 function PostsList(props) {
   let [posts, setPosts] = useState([]);
@@ -16,10 +17,10 @@ function PostsList(props) {
     posts = posts.filter(function(el) {
       return el.Username == props.username;
     });
-  
+
   const [likeCount, setLikeCount] = useState(50);
   const [dislikeCount, setDislikeCount] = useState(25);
-    
+
   const [activeBtn, setActiveBtn] = useState("none");
   const handleLikeClick = () => {
     if (activeBtn === "none") {
@@ -27,13 +28,13 @@ function PostsList(props) {
       setActiveBtn("like");
       return;
     }
-  
-    if (activeBtn === 'like'){
+
+    if (activeBtn === "like") {
       setLikeCount(likeCount - 1);
       setActiveBtn("none");
       return;
     }
-  
+
     if (activeBtn === "dislike") {
       setLikeCount(likeCount + 1);
       setDislikeCount(dislikeCount - 1);
@@ -46,13 +47,13 @@ function PostsList(props) {
       setActiveBtn("dislike");
       return;
     }
-   
-    if (activeBtn === 'dislike'){
+
+    if (activeBtn === "dislike") {
       setDislikeCount(dislikeCount - 1);
       setActiveBtn("none");
       return;
     }
- 
+
     if (activeBtn === "like") {
       setDislikeCount(dislikeCount + 1);
       setLikeCount(likeCount - 1);
@@ -79,16 +80,18 @@ function PostsList(props) {
                 className={`btn ${activeBtn === "like" ? "like-active" : ""}`}
                 onClick={handleLikeClick}
               >
-                <span className="">thumb_up</span>
-                Like {likeCount}
+                <AiOutlineLike />
+                {likeCount}
               </button>
-          
+
               <button
-                className={`btn ${activeBtn === "dislike" ? "dislike-active" : ""}`}
+                className={`btn ${
+                  activeBtn === "dislike" ? "dislike-active" : ""
+                }`}
                 onClick={handleDisikeClick}
               >
-                <span className="">thumb_down</span>
-                Dislike {dislikeCount}
+                <AiOutlineDislike />
+                {dislikeCount}
               </button>
             </div>
           </div>
