@@ -1,0 +1,11 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(21,32,43,1.00);
+    color: white;
+}
+
+.profile img{
+    max-width: 200px
+}

@@ -4,6 +4,7 @@
   justify-content: center;
   height: 100%;
   width: 100%;
+  background-color: rgba(21,32,43,1.00);
 }
 
 .card {
@@ -19,15 +20,22 @@
   padding: 15px;
   transition: transform 0.3s, box-shadow 0.3s;
   margin-top: 5%;
+  flex: 1 1 auto;
 }
 
 .tweet {
+  justify-content: center;
+  flex: 1 1 auto;
+  height: fit-content;
+  width: 98%;
+  margin-top: 20px;
+}
+
+.graph_preview{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 200px;
-  width: 98%;
-  margin-top: 5px;
+  flex: 1 1 auto;
 }
 
 .tweet form {
@@ -36,7 +44,7 @@
 }
 
 .tweet form .post {
-  margin-top: 5px;
+  margin-top: 15px;
   width: 130px;
   height: 45px;
   padding: 1.3em 3em;
@@ -90,20 +98,36 @@
 
 .file {
   margin-left: 40%;
-  margin-top: 10px;
+  max-width: fit-content;
 }
 
 input[type="file"]::file-selector-button {
-  margin-right: 20px;
+  width: fit-content;
+  height: 45px;
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #000;
+  background-color: #fff;
   border: none;
-  background-color: #00ff7f;
-  padding: 10px 20px;
-  border-radius: 10px;
-  color: #fff;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease 0s;
   cursor: pointer;
-  transition: 0.2s ease-in-out;
+  outline: none;
 }
 
 input[type="file"]::file-selector-button:hover {
-  background: #02b55b;
+  background-color: #23c483;
+  box-shadow: 0px 5px 10px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-1px);
+}
+input[type="file"]{
+  color: white;
+  width: fit-content;
+  height: 45px;
+  padding: 1.3em 3em;
+  font-size: 12px;
 }

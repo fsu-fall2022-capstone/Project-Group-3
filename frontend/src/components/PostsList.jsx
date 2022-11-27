@@ -31,6 +31,7 @@ function PostsList(props) {
               <p>{post.Description}</p>
             </div>
           </div>
+          {/*where graph visualization goes*/}
         </div>
       ))}
     </div>

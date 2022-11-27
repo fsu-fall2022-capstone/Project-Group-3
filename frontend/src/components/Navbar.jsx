@@ -17,9 +17,6 @@ export default function Navbar() {
           <Link to="/search">Search</Link>
         </li>
         <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
           <Link to="/profile">Profile</Link>
         </li>
         <li className="log in/out">

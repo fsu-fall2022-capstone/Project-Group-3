@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
-import About from "./components/About";
 import Profile from "./components/Profile";
 import LoginButton from "./components/Login";
 import LogoutButton from "./components/Logout";
@@ -20,7 +19,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<LoginButton />} />
           <Route path="/logout" element={<LogoutButton />} />

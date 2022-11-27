@@ -1,6 +1,6 @@
 .nav {
   color: white;
-  background-color: #00ff7f;
+  background: #202935 !important;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,11 +30,22 @@ a {
 }
 
 .login {
-  background-color: #fff;
-  font-family: "Times New Roman";
+  background-color: white;
   border: none;
   cursor: pointer;
   border-radius: 5px;
-  color: #00ff7f;
+  color: black;
   font-size: 1.2rem;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: unset;
+  line-height: 17px;
+  text-transform: unset;
+  min-height: 32px;
+  min-width: 32px;
+  padding: 4px 16px;
+}
+
+.login:hover{
+  background-color: #D7DADC;
 }
