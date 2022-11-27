@@ -25,10 +25,15 @@ const Profile = () => {
   return (
     isAuthenticated && (
       <div className="profile">
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-        <PostsList username={current.Username} />
+        <div className="info">
+          <img src={user.picture} alt={user.name} />
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+          <button className="edit">Edit</button>
+        </div>
+        <div className="profilePosts">
+          <PostsList username={current.Username} />
+        </div>
       </div>
     )
   );
