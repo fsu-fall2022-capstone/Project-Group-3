@@ -1,28 +1,43 @@
-//Working on making it work with fake data for testing
+import React, { useState } from 'react';
+import '../styles/search.css';
+import Data from '../assets/MockData.json'
 
-import React, {useState} from 'react'
+function Search() {
+    const [filteredData, setFilteredData] = useState([]);
 
-const SearchBar = () => {
-    const [searchInput, setSearchInput] = useState("");
+    const handleFilter = (event) => {
+        const searchWord = event.target.value
+        const newFilter = Data.filter((value) => {
+            return value.title.toLowerCase().includes(searchWord.toLowerCase());
+        });
 
-    const handleChange = (e) => {
-        e.preventDefault();
-        setSearchInput(e.target.value);
-    };
-
-    if (searchInput.length > 0) {
-        //filter through data
+        if (searchWord === "") {
+            setFilteredData([]);
+        } else {
+            setFilteredData(newFilter);
+        }
+        setFilteredData(newFilter);
     }
-
-    return <div>
-
-    <input
-        type="text"
-        placeholder="Search here"
-        onChange={handleChange}
-        value={searchInput} />
-    </div>
     
-};
+    return (
+        <div className="search">
+            <div className="searchInputs">
+                <input type="text" placeholder="Enter Content of Post" onChange={handleFilter}/>
+                <div className="searchIcon" placeholder="SEARCH"></div>
+            </div>
+            {filteredData.length != 0 && (
+                <div className="dataResult">
+                    {filteredData.slice(0, 15).map((value, key) => {
+                        return (
+                            <a className="dataItem" href={value.author} target="_blank">
+                                <p>{value.title}</p>
+                            </a>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    );
+}
 
-export default SearchBar;
+export default Search;

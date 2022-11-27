@@ -14,6 +14,9 @@ export default function Navbar() {
       </Link>
       <ul className="pages">
         <li>
+          <Link to="/search">Search</Link>
+        </li>
+        <li>
           <Link to="/about">About</Link>
         </li>
         <li>
