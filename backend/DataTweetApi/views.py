@@ -10,7 +10,6 @@ from django.http import HttpResponse
 from django.http.response import JsonResponse
 from . import models
 from . import serializers
-import json
 import datetime
 from django.core.serializers.json import DjangoJSONEncoder
 
@@ -38,6 +37,25 @@ def create_user(request):
     except:
         print("Could not add user")
         return JsonResponse("Could not add to user", safe=False)
+
+@csrf_exempt
+def update_user(request):
+    try:
+        x = {'Username': request.POST['Username'],
+        'Password': 'xxx',
+        'Email': request.POST['Email'], 
+        'About': request.POST['About'],
+        'RoleLvl': 2,
+        'FirstName': request.POST['First'],
+        'LastName': request.POST['Last']}
+        user = models.users.objects.get(Username=request.POST['OldUsername'])
+        users_serializer = serializers.UsersSerializer(user, data=x)
+        if users_serializer.is_valid():
+            users_serializer.save()
+        return JsonResponse("Updated Successfully", safe=False)
+    except:
+        print("Could not add user")
+        return JsonResponse("Could not update to user", safe=False)
     
     
 
