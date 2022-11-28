@@ -21,6 +21,7 @@ function Home(){
     const options = {
         chart: {
             type: 'bar',
+            zoomType: "x"
 
         },
         title:{
@@ -30,6 +31,7 @@ function Home(){
           title: {
             text: selected.x.name ? selected.x.name : "X-Axis",
           },
+          minRange: 1,
           categories: selected.x.values ? selected.x.values : [],
         },
     
@@ -41,7 +43,7 @@ function Home(){
         series: [
           {
             data: selected.y.values
-              ? selected.y.values.map((el) => Number(el))
+              ? selected.y.values.map((el) =>Number(el))
               : [],
           },
         ],

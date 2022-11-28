@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
 import { fetch_url } from "..";
 
 export async function get_index() {
@@ -23,6 +22,18 @@ export async function create_user(body) {
   Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
   Axios.defaults.xsrfCookieName = "csrftoken";
   const response = await Axios.post(`${fetch_url}create_user`, body, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+  return await response.data;
+}
+
+export async function update_user(body) {
+  Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  Axios.defaults.xsrfCookieName = "csrftoken";
+  const response = await Axios.post(`${fetch_url}update_user`, body, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

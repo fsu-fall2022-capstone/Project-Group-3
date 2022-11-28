@@ -3,33 +3,33 @@ import '../styles/search.css';
 import Data from '../assets/MockData.json'
 
 function Search() {
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredData, changeData] = useState([]);
+    const [str, setStr] = useState("");
 
     const handleFilter = (event) => {
-        const searchWord = event.target.value
+        const keyword = event.target.value
+        setStr(keyword);
         const newFilter = Data.filter((value) => {
-            return value.title.toLowerCase().includes(searchWord.toLowerCase());
+            return value.title.toLowerCase().includes(keyword.toLowerCase());
         });
 
-        if (searchWord === "") {
-            setFilteredData([]);
-        } else {
-            setFilteredData(newFilter);
-        }
-        setFilteredData(newFilter);
+        if (keyword === "") { changeData([]);} 
+        else { changeData(newFilter); }
+
+        changeData(newFilter);
     }
     
     return (
         <div className="search">
-            <div className="searchInputs">
-                <input type="text" placeholder="Enter Content of Post" onChange={handleFilter}/>
-                <div className="searchIcon" placeholder="SEARCH"></div>
+            <div className="input">
+                <input type="text" placeholder="Enter Content of Post or Author" onChange={handleFilter}/>
+
             </div>
             {filteredData.length != 0 && (
-                <div className="dataResult">
-                    {filteredData.slice(0, 15).map((value, key) => {
+                <div className="result">
+                    {filteredData.slice(0, 20).map((value) => {
                         return (
-                            <a className="dataItem" href={value.author} target="_blank">
+                            <a className="item" href={value.author} target="_blank">
                                 <p>{value.title}</p>
                             </a>
                         );
