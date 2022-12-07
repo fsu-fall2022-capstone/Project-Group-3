@@ -4,6 +4,8 @@ import user from "../assets/user.png";
 import { useEffect, useState } from "react";
 import { get_posts } from "../Utilities/FetchFunction";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 function PostsList(props) {
   let [posts, setPosts] = useState([]);
@@ -72,8 +74,44 @@ function PostsList(props) {
                 @{post.Username} . {post.PostedWhen.replace("T", " ")}
               </span>
               <p>{post.Description}</p>
+              <section className = "highcharts-section" style={{ marginTop: 20 }}>
+                <HighchartsReact highcharts={Highcharts} options={
+                  {
+        chart: {
+          type: 'bar',
+          zoomType: "x"
+
+        },
+        title:{
+          text: ""
+        },
+        xAxis: {
+          title: {
+            text: JSON.parse(post.xData).name ? JSON.parse(post.xData).name : "X-Axis",
+          },
+          minRange: 1,
+          categories: JSON.parse(post.xData).values ? JSON.parse(post.xData).values : [],
+        },
+  
+        yAxis: {
+          title: {
+            text: JSON.parse(post.yData).name ? JSON.parse(post.yData).name : "Y-Axis",
+          },
+        },
+        series: [
+          {
+            data: JSON.parse(post.yData).values
+              ? JSON.parse(post.yData).values.map((el) =>Number(el))
+            : [],
+        },
+        ]
+      }} />
+              </section>
             </div>
           </div>
+          <div>
+              <a href={post.File} > Download! </a>
+            </div>
           <div className="likedislike">
             <div className="btn-container">
               <button

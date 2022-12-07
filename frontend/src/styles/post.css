@@ -64,3 +64,7 @@
 .dislike-active {
     background-color: #FF2853;
 }
+
+.highcharts-section{
+    width: 100%;
+}

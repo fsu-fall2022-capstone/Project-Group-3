@@ -98,7 +98,6 @@ def get_posts(request):
     if(request.method == 'GET'):
         posts = models.posts.objects.all().order_by('-PostedWhen')
         posts_json = serializers.GetPostsSerializer(posts, many= True)
-
         if(posts_json):
             return JsonResponse(posts_json.data, safe=False)
 
