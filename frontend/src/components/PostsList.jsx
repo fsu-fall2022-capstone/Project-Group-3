@@ -109,6 +109,9 @@ function PostsList(props) {
               </section>
             </div>
           </div>
+          <div>
+              <a href={post.File} > Download! </a>
+            </div>
           <div className="likedislike">
             <div className="btn-container">
               <button
