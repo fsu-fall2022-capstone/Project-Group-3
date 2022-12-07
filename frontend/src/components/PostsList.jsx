@@ -74,7 +74,9 @@ function PostsList(props) {
                 @{post.Username} . {post.PostedWhen.replace("T", " ")}
               </span>
               <p>{post.Description}</p>
-              <section className = "highcharts-section" style={{ marginTop: 20 }}>
+            </div>
+          </div>
+          <div className = "highcharts-section" style={{ marginTop: 20 }}>
                 <HighchartsReact highcharts={Highcharts} options={
                   {
         chart: {
@@ -106,12 +108,12 @@ function PostsList(props) {
         },
         ]
       }} />
-              </section>
-            </div>
+              </div>
+          <div className="download-container">
+          <a href={post.File}>
+            <button className="download-btn">Download</button>
+          </a>
           </div>
-          <div>
-              <a href={post.File} > Download! </a>
-            </div>
           <div className="likedislike">
             <div className="btn-container">
               <button
