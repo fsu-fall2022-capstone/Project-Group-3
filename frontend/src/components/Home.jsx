@@ -13,7 +13,6 @@ import HighchartsReact from "highcharts-react-official";
 function Home(){
     const {info, setInfo, submit} = useHome()
     const [list, setList] = useState([])
-    const [selected, setSelected] = useState({x: {}, y: {}})
     const [tempSelect, setTempSelect] = useState({x: '', y: ''})
 
     const fileReader = new FileReader();
@@ -29,21 +28,21 @@ function Home(){
         },
         xAxis: {
           title: {
-            text: selected.x.name ? selected.x.name : "X-Axis",
+            text: info.xData.name ? info.xData.name : "X-Axis",
           },
           minRange: 1,
-          categories: selected.x.values ? selected.x.values : [],
+          categories: info.xData.values ? info.xData.values : [],
         },
     
         yAxis: {
           title: {
-            text: selected.y.name ? selected.y.name : "Y-Axis",
+            text: info.yData.name ? info.yData.name : "Y-Axis",
           },
         },
         series: [
           {
-            data: selected.y.values
-              ? selected.y.values.map((el) =>Number(el))
+            data: info.yData.values
+              ? info.yData.values.map((el) =>Number(el))
               : [],
           },
         ],
@@ -85,9 +84,9 @@ function Home(){
         const x_list = list.find((el) => el.name === x);
         const y_list = list.find((el) => el.name === y);
         // Set selected x & y...
-        setSelected({
-          x: x_list,
-          y: y_list,
+        setInfo({
+          xData: x_list,
+          yData: y_list,
         });
       };
 

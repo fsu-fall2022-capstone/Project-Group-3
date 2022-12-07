@@ -80,7 +80,9 @@ def create_post(request):
         File = request.FILES['csv_file']
         Description = request.POST['Description']
         Tags = request.POST['Tags']
-        form = {"Username": Username, "File": File, "Description": Description, "Tags": Tags}
+        xData = request.POST['xData']
+        yData = request.POST['yData']
+        form = {"Username": Username, "File": File, "Description": Description, "xData": xData, "yData": yData, "Tags": Tags}
         form['PostedWhen'] = datetime.datetime.strptime(datetime.datetime.now().strftime('%m/%d/%y %H:%M:%S'), '%m/%d/%y %H:%M:%S') 
         post = serializers.PostsSerializer(data=form)
         if post.is_valid():

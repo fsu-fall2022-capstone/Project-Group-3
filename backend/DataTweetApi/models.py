@@ -15,6 +15,8 @@ class posts(models.Model):
     PostID = models.AutoField(primary_key=True)
     File = models.FileField(upload_to='media/', null = True)
     Username = models.ForeignKey(to=users, on_delete=models.CASCADE, related_name='user')
+    xData = models.TextField(blank = True)
+    yData = models.TextField(blank = True)
     PostedWhen = models.DateTimeField()
     Tags = models.CharField(max_length=500, null = True)
     Description = models.CharField(max_length = 500)

@@ -36,6 +36,8 @@ const useHome = () => {
           formData.append("csv_file", info.file);
           formData.append("Username", current.Username);
           formData.append("Description", info.post);
+          formData.append("xData", JSON.stringify(info.xData));
+          formData.append("yData", JSON.stringify(info.yData));
           formData.append("Tags", null);
           create_post(formData).then((res) => {
             if (res === 200) {
@@ -43,6 +45,8 @@ const useHome = () => {
                 hasSubmitted: false,
                 post: "",
                 file: null,
+                xData: {},
+                yData: {},
                 hasError: false,
               });
               window.location.reload(true);
@@ -81,6 +85,8 @@ export default useHome;
 const initialInfo = {
   post: "",
   file: null,
+  xData: {},
+  yData: {},
   hasError: false,
   errorMessage: "",
   hasSubmitted: false,

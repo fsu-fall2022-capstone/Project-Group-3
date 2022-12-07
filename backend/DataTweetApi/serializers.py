@@ -16,4 +16,4 @@ class GetPostsSerializer(serializers.ModelSerializer):
 class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model=models.posts
-        fields=('File', 'Username', 'Description', 'PostedWhen','Tags')
+        fields=('File', 'Username', 'Description', 'xData', 'yData', 'PostedWhen', 'Tags')
