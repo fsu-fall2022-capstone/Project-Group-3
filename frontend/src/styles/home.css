@@ -131,3 +131,7 @@ input[type="file"]{
   padding: 1.3em 3em;
   font-size: 12px;
 }
+
+.loginmessage{
+  color: white;
+}

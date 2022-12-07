@@ -17,12 +17,17 @@ export default function Navbar() {
           <Link to="/search">Search</Link>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+        {(() => {
+            if (isAuthenticated) 
+              return <Link to="/profile">Profile</Link>;
+          })()}
         </li>
         <li className="log in/out">
           {(() => {
-            if (isAuthenticated) return <LogoutButton>Logout</LogoutButton>;
-            else return <LoginButton>Login</LoginButton>;
+            if (isAuthenticated) 
+              return <LogoutButton>Logout</LogoutButton>;
+            else 
+              return <LoginButton>Login</LoginButton>;
           })()}
         </li>
       </ul>

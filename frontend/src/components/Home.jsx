@@ -9,12 +9,14 @@ import FileUploader from './FileUploader';
 import * as CSV from "csv-string"
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 function Home(){
     const {info, setInfo, submit} = useHome()
     const [list, setList] = useState([])
     const [tempSelect, setTempSelect] = useState({x: '', y: ''})
-
+    const { isAuthenticated } = useAuth0();
     const fileReader = new FileReader();
 
     const options = {
@@ -104,8 +106,10 @@ function Home(){
         <div className="home">
             { info.hasError ? <Alert severity="error"> {info.errorMessage} </Alert> : <></>}
             <div className = "card"> 
-                <div className = 'tweet'>
-                    <form className = "post-form" onSubmit={submit}>
+              {(() => {
+              if (isAuthenticated) 
+                return <div className = 'tweet'>
+                  <form className = "post-form" onSubmit={submit}>
                     <textarea className='text-tweet' placeholder='Share something...' value = {info.post} onChange={(e) => setInfo({post:e.target.value})}>                     
                     </textarea>
                     <div className = "graph-preview">
@@ -136,23 +140,25 @@ function Home(){
                         }
                     </div>
                     <div className='aftertextarea'>                 
-                    {
-                        info.hasSubmitted ?
-                        <CircularProgress />
-                        :
-                        <button className="post" type="submit">Post</button>
-                    }
-                    <FileUploader
-                    onFileSelectSuccess={(fileupload) => setInfo({file: fileupload})}
-                    />
+                      {
+                          info.hasSubmitted ?
+                          <CircularProgress />
+                          :
+                          <button className="post" type="submit">Post</button>
+                      }
+                      <FileUploader
+                      onFileSelectSuccess={(fileupload) => setInfo({file: fileupload})}
+                      />
                     </div>
+                  </form>
+                </div>;
+              else 
+                return <h1 className='loginmessage'>Log in to post</h1>;
+              })()}
 
-                    </form>
-                </div>
-
-                <div className = 'posts'>
-                    <PostsList />
-                </div>
+              <div className = 'posts'>
+                  <PostsList />
+              </div>
 
             </div>
         </div>

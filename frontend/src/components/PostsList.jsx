@@ -22,7 +22,6 @@ function PostsList(props) {
 
   const [likeCount, setLikeCount] = useState(50);
   const [dislikeCount, setDislikeCount] = useState(25);
-
   const [activeBtn, setActiveBtn] = useState("none");
   const handleLikeClick = () => {
     if (activeBtn === "none") {
@@ -30,13 +29,11 @@ function PostsList(props) {
       setActiveBtn("like");
       return;
     }
-
     if (activeBtn === "like") {
       setLikeCount(likeCount - 1);
       setActiveBtn("none");
       return;
     }
-
     if (activeBtn === "dislike") {
       setLikeCount(likeCount + 1);
       setDislikeCount(dislikeCount - 1);
@@ -49,19 +46,18 @@ function PostsList(props) {
       setActiveBtn("dislike");
       return;
     }
-
     if (activeBtn === "dislike") {
       setDislikeCount(dislikeCount - 1);
       setActiveBtn("none");
       return;
     }
-
     if (activeBtn === "like") {
       setDislikeCount(dislikeCount + 1);
       setLikeCount(likeCount - 1);
       setActiveBtn("dislike");
     }
   };
+
   return (
     <div className="postslist">
       {posts.map((post, key) => (
@@ -121,7 +117,7 @@ function PostsList(props) {
                 onClick={handleLikeClick}
               >
                 <AiOutlineLike />
-                {likeCount}
+                {post.likes}
               </button>
 
               <button
@@ -131,7 +127,7 @@ function PostsList(props) {
                 onClick={handleDisikeClick}
               >
                 <AiOutlineDislike />
-                {dislikeCount}
+                {post.dislikes}
               </button>
             </div>
           </div>
