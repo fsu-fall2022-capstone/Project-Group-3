@@ -1,5 +1,5 @@
 .postscard{
-    width: 90%;
+    width: 100%;
     background: transparent;
     margin: 0 auto;
     margin-top: 50px;
@@ -63,4 +63,8 @@
 
 .dislike-active {
     background-color: #FF2853;
+}
+
+.highcharts-section{
+    width: 100%;
 }

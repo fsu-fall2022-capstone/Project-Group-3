@@ -5,6 +5,7 @@ import { updateUsers } from "../Utilities/updateUsers";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
+
 const useHome = () => {
   const [info, setInfo] = useReducer(infoReducer, initialInfo);
   const { user, loginWithRedirect } = useAuth0();
