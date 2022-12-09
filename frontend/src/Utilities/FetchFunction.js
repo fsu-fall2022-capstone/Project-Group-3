@@ -30,6 +30,18 @@ export async function create_user(body) {
   return await response.data;
 }
 
+export async function delete_user(body) {
+  Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  Axios.defaults.xsrfCookieName = "csrftoken";
+  const response = await Axios.post(`${fetch_url}delete_user`, body, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  console.log("Response ", response.data);
+  return await response.data;
+}
+
 export async function update_user(body) {
   Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
   Axios.defaults.xsrfCookieName = "csrftoken";

@@ -12,6 +12,7 @@ from . import models
 from . import serializers
 import datetime
 from django.core.serializers.json import DjangoJSONEncoder
+from .models import users
 
 # Create your views here.
 
@@ -37,6 +38,17 @@ def create_user(request):
     except:
         print("Could not add user")
         return JsonResponse("Could not add to user", safe=False)
+
+@csrf_exempt
+def delete_user(request):
+    try:
+        username = request.POST.get('Username')
+        userToDelete=users.objects.get(Username=username)
+        userToDelete.delete()
+        return JsonResponse("Deleted Successfully", safe=False)
+    except:
+        print("Could not delete")
+        return JsonResponse("Could not delete", safe=False)
 
 @csrf_exempt
 def update_user(request):
