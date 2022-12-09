@@ -29,7 +29,7 @@ function Search() {
                 <div className="result">
                     {filteredData.slice(0, 20).map((value) => {
                         return (
-                            <a className="item" href={value.author} target="_blank">
+                            <a className="item" href={value.content} target="_blank">
                                 <p>{value.title}</p>
                             </a>
                         );
