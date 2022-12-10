@@ -36,6 +36,8 @@ class Migration(migrations.Migration):
                 ('Tags', models.CharField(max_length=500, null=True)),
                 ('Description', models.CharField(max_length=500)),
                 ('Username', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user', to='DataTweetApi.users')),
+                ('likes', models.TextField()),
+                ('dislikes', models.TextField()),
             ],
         ),
     ]

@@ -83,3 +83,35 @@ export async function get_current_user(body) {
 
   return response.data[0];
 }
+
+export async function dislike(body) {
+  Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  Axios.defaults.xsrfCookieName = "csrftoken";
+  const response = await Axios.post(`${fetch_url}dislike`, body, {
+  });
+  return await response.data;
+}
+
+export async function delete_dislike(body) {
+  Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  Axios.defaults.xsrfCookieName = "csrftoken";
+  const response = await Axios.post(`${fetch_url}delete_dislike`, body, {
+  });
+  return await response.data;
+}
+
+export async function like(body) {
+  Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  Axios.defaults.xsrfCookieName = "csrftoken";
+  const response = await Axios.post(`${fetch_url}like`, body, {
+  });
+  return await response.data;
+}
+
+export async function delete_like(body) {
+  Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  Axios.defaults.xsrfCookieName = "csrftoken";
+  const response = await Axios.post(`${fetch_url}delete_like`, body, {
+  });
+  return await response.data;
+}
