@@ -15,5 +15,10 @@ urlpatterns = [
     path('get_users', views.get_users),
     path('get_current_user', views.get_current_user),
     path("register", views.register, name="register"),
+    path('like', views.like),
+    path('dislike', views.dislike),
+    path('delete_dislike', views.delete_dislike),
+    path('like', views.like),
+    path('delete_like', views.delete_like),
 
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

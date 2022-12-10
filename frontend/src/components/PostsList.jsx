@@ -6,6 +6,11 @@ import { get_posts } from "../Utilities/FetchFunction";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { like } from "../Utilities/FetchFunction";
+import { dislike } from "../Utilities/FetchFunction";
+import { delete_dislike } from "../Utilities/FetchFunction";
+import { delete_like } from "../Utilities/FetchFunction";
+
 
 function PostsList(props) {
   let [posts, setPosts] = useState([]);
@@ -25,12 +30,18 @@ function PostsList(props) {
   const [activeBtn, setActiveBtn] = useState("none");
   const handleLikeClick = () => {
     if (activeBtn === "none") {
-      setLikeCount(likeCount + 1);
+      let request = {
+        like: like,
+      };
+      like(request);
       setActiveBtn("like");
       return;
     }
     if (activeBtn === "like") {
-      setLikeCount(likeCount - 1);
+      let request = {
+        like: like,
+      };
+      delete_like(request);
       setActiveBtn("none");
       return;
     }
@@ -42,12 +53,18 @@ function PostsList(props) {
   };
   const handleDisikeClick = () => {
     if (activeBtn === "none") {
-      setDislikeCount(dislikeCount + 1);
+      let request = {
+        dislike: dislike,
+      };
+      dislike(request);
       setActiveBtn("dislike");
       return;
     }
     if (activeBtn === "dislike") {
-      setDislikeCount(dislikeCount - 1);
+      let request = {
+        dislike: dislike,
+      };
+      delete_dislike(request);
       setActiveBtn("none");
       return;
     }

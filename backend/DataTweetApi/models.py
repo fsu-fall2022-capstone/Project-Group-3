@@ -20,3 +20,5 @@ class posts(models.Model):
     PostedWhen = models.DateTimeField()
     Tags = models.CharField(max_length=500, null = True)
     Description = models.CharField(max_length = 500)
+    likes = models.TextField()
+    dislikes = models.TextField()

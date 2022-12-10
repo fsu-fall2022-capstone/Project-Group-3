@@ -153,3 +153,31 @@ def register(request):
 
     context = {'form': form}
     return render(request, 'users/register.html', context)
+
+@csrf_exempt
+def dislike(request):
+    dislike = request.POST.get('dislikes')
+    dislike = posts.objects.get(dislike=dislike)
+    dislike.delete()
+    return JsonResponse("Disliked successfully", safe=False)
+
+@csrf_exempt
+def delete_dislike(request):
+    dislike = request.POST.get('dislike')
+    dislike = posts.objects.get(dislike=dislike)
+    dislike.delete()
+    return JsonResponse("Deleted dislike successfully", safe=False)
+
+@csrf_exempt
+def like(request):
+    like = request.POST.get('like')
+    like = posts.objects.get(like=like)
+    like.delete()
+    return JsonResponse("Liked successfully", safe=False)
+
+@csrf_exempt
+def delete_like(request):
+    like = request.POST.get('like')
+    like = posts.objects.get(like=like)
+    like.delete()
+    return JsonResponse("Deleted like successfully", safe=False)
