@@ -11,7 +11,7 @@ class GetPostsSerializer(serializers.ModelSerializer):
     LastName = serializers.CharField(source = 'Username.LastName')
     class Meta:
         model=models.posts
-        fields=('Username', 'Description', 'PostedWhen', 'File', 'xData', 'yData', 'Tags', 'FirstName', 'LastName')
+        fields=('Username', 'Description', 'PostedWhen', 'File', 'xData', 'yData', 'Tags', 'FirstName', 'LastName', 'PostID')
 
 class PostsSerializer(serializers.ModelSerializer):
     class Meta:
