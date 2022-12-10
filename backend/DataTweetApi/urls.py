@@ -9,8 +9,10 @@ urlpatterns = [
 
     path('index', views.index, name='index'),
     path('create_post', views.create_post),
+    path('delete_post', views.delete_post),
     path('get_posts', views.get_posts),
     path('create_user', views.create_user),
+    path('delete_user', views.delete_user),
     path('update_user', views.update_user),
     path('get_users', views.get_users),
     path('get_current_user', views.get_current_user),

@@ -12,6 +12,7 @@ from . import models
 from . import serializers
 import datetime
 from django.core.serializers.json import DjangoJSONEncoder
+from .models import users, posts
 
 # Create your views here.
 
@@ -37,6 +38,17 @@ def create_user(request):
     except:
         print("Could not add user")
         return JsonResponse("Could not add to user", safe=False)
+
+@csrf_exempt
+def delete_user(request):
+    try:
+        username = request.POST.get('Username')
+        userToDelete=users.objects.get(Username=username)
+        userToDelete.delete()
+        return JsonResponse("Deleted Successfully", safe=False)
+    except:
+        print("Could not delete")
+        return JsonResponse("Could not delete", safe=False)
 
 @csrf_exempt
 def update_user(request):
@@ -94,9 +106,21 @@ def create_post(request):
     return HttpResponse(400)
 
 @csrf_exempt
+def delete_post(request):
+    try:
+        PostID = request.POST.get('PostID')
+        postToDelete=posts.objects.get(PostID=PostID)
+        postToDelete.delete()
+        return JsonResponse("Deleted Successfully", safe=False)
+    except:
+        print("Could not delete")
+        return JsonResponse("Could not delete", safe=False)
+
+@csrf_exempt
 def get_posts(request):
     if(request.method == 'GET'):
         posts = models.posts.objects.all().order_by('-PostedWhen')
+        # print(posts)
         posts_json = serializers.GetPostsSerializer(posts, many= True)
         if(posts_json):
             return JsonResponse(posts_json.data, safe=False)

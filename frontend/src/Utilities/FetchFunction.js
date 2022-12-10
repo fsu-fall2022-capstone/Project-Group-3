@@ -18,6 +18,17 @@ export async function create_post(body) {
   return await response.data;
 }
 
+export async function delete_post(body) {
+  Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  Axios.defaults.xsrfCookieName = "csrftoken";
+  const response = await Axios.post(`${fetch_url}delete_post`, body, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  return await response.data;
+}
+
 export async function create_user(body) {
   Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
   Axios.defaults.xsrfCookieName = "csrftoken";
@@ -27,6 +38,17 @@ export async function create_user(body) {
     },
   });
 
+  return await response.data;
+}
+
+export async function delete_user(body) {
+  Axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+  Axios.defaults.xsrfCookieName = "csrftoken";
+  const response = await Axios.post(`${fetch_url}delete_user`, body, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   return await response.data;
 }
 

@@ -6,28 +6,44 @@ import { get_posts } from "../Utilities/FetchFunction";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { delete_post } from "../Utilities/FetchFunction";
 import { like } from "../Utilities/FetchFunction";
 import { dislike } from "../Utilities/FetchFunction";
 import { delete_dislike } from "../Utilities/FetchFunction";
 import { delete_like } from "../Utilities/FetchFunction";
 
-
 function PostsList(props) {
   let [posts, setPosts] = useState([]);
+  const [randomNumber, setRandomNumber] = useState(0);
+  let inProfile = false;
 
   useEffect(() => {
     get_posts().then((res) => {
       setPosts(res.data);
+      console.log("USE EFFECT");
     });
-  }, []);
-  if (!!props.username)
+  }, [randomNumber]);
+
+  if (!!props.username) {
+    inProfile = true;
     posts = posts.filter(function(el) {
       return el.Username == props.username;
     });
+  }
 
   const [likeCount, setLikeCount] = useState(50);
   const [dislikeCount, setDislikeCount] = useState(25);
   const [activeBtn, setActiveBtn] = useState("none");
+
+  const handleDelete = (event, postID) => {
+    event.preventDefault();
+    let request = {
+      PostID: postID,
+    };
+    setRandomNumber(Math.random());
+    delete_post(request);
+  };
+
   const handleLikeClick = () => {
     if (activeBtn === "none") {
       let request = {
@@ -89,43 +105,60 @@ function PostsList(props) {
               <p>{post.Description}</p>
             </div>
           </div>
-          <div className = "highcharts-section" style={{ marginTop: 20 }}>
-                <HighchartsReact highcharts={Highcharts} options={
-                  {
-        chart: {
-          type: 'bar',
-          zoomType: "x"
+          <div className="highcharts-section" style={{ marginTop: 20 }}>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={{
+                chart: {
+                  type: "bar",
+                  zoomType: "x",
+                },
+                title: {
+                  text: "",
+                },
+                xAxis: {
+                  title: {
+                    text: JSON.parse(post.xData).name
+                      ? JSON.parse(post.xData).name
+                      : "X-Axis",
+                  },
+                  minRange: 1,
+                  categories: JSON.parse(post.xData).values
+                    ? JSON.parse(post.xData).values
+                    : [],
+                },
 
-        },
-        title:{
-          text: ""
-        },
-        xAxis: {
-          title: {
-            text: JSON.parse(post.xData).name ? JSON.parse(post.xData).name : "X-Axis",
-          },
-          minRange: 1,
-          categories: JSON.parse(post.xData).values ? JSON.parse(post.xData).values : [],
-        },
-  
-        yAxis: {
-          title: {
-            text: JSON.parse(post.yData).name ? JSON.parse(post.yData).name : "Y-Axis",
-          },
-        },
-        series: [
-          {
-            data: JSON.parse(post.yData).values
-              ? JSON.parse(post.yData).values.map((el) =>Number(el))
-            : [],
-        },
-        ]
-      }} />
-              </div>
+                yAxis: {
+                  title: {
+                    text: JSON.parse(post.yData).name
+                      ? JSON.parse(post.yData).name
+                      : "Y-Axis",
+                  },
+                },
+                series: [
+                  {
+                    data: JSON.parse(post.yData).values
+                      ? JSON.parse(post.yData).values.map((el) => Number(el))
+                      : [],
+                  },
+                ],
+              }}
+            />
+          </div>
           <div className="download-container">
-          <a href={post.File}>
-            <button className="download-btn">Download</button>
-          </a>
+            <a href={post.File}>
+              <button className="download-btn">Download</button>
+            </a>
+            <div>
+              {inProfile && (
+                <button
+                  className="download-btn deletePost"
+                  onClick={(event) => handleDelete(event, post.PostID)}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
           </div>
           <div className="likedislike">
             <div className="btn-container">

@@ -35,9 +35,13 @@ const Profile = () => {
           <img src={user.picture} alt={user.name} />
           <h2>{user.name}</h2>
           <p>{user.email}</p>
-          <button className="edit" onClick={handleEdit}>
-            Edit
-          </button>
+          <div>
+            {!isEditing && (
+              <button className="editUser m-b" onClick={handleEdit}>
+                Edit
+              </button>
+            )}
+          </div>
           <div>{isEditing && <EditUser current={current} />}</div>
         </div>
         <div className="profilePosts">
